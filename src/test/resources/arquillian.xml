@@ -1,0 +1,14 @@
+<arquillian xmlns="http://jboss.org/schema/arquillian"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="
+        http://jboss.org/schema/arquillian
+        http://jboss.org/schema/arquillian/arquillian_1_0.xsd">
+    <container qualifier="jbossas-managed" default="true">
+        <configuration>
+            <!-- Use port offset of 550 so you don't interfere with another server running the default setting -->
+            <property name="managementPort">10549</property>
+            <property name="jbossHome">${jboss.home}</property>
+            <property name="serverConfig">standalone-test.xml</property>
+        </configuration>
+    </container>
+</arquillian>

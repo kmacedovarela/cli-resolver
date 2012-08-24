@@ -1,0 +1,188 @@
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.jboss</groupId>
+        <artifactId>jboss-parent</artifactId>
+        <version>9</version>
+    </parent>
+
+    <groupId>org.jboss.dmrresolver</groupId>
+    <artifactId>dmrresolver</artifactId>
+    <version>1.0.0.Alpha1-SNAPSHOT</version>
+    <packaging>jar</packaging>
+
+    <name>dmrresolver</name>
+    <description>The dmrresolver allows access to the JBoss AS7 management model from the Expression Language.</description>
+    <url>http://maven.apache.org</url>
+
+    <properties>
+        <!-- For unit tests to work, set your JBOSS_HOME environment variable or set jboss.home in settings.xml -->
+        <jboss.home>${env.JBOSS_HOME}</jboss.home>
+        
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <version.jboss-as7>7.1.1.Final</version.jboss-as7>
+        <version.org.jboss.spec.javax.el.jboss-el-api_2.2_spec>1.0.1.Final</version.org.jboss.spec.javax.el.jboss-el-api_2.2_spec>
+        <version.org.jboss.spec.javax.faces.jboss-jsf-api_2.1_spec>2.0.4.Final</version.org.jboss.spec.javax.faces.jboss-jsf-api_2.1_spec>
+        <version.org.jboss.msc.jboss-msc>1.0.2.GA</version.org.jboss.msc.jboss-msc>
+        <version.org.jboss.jboss-dmr>1.1.1.Final</version.org.jboss.jboss-dmr>
+    </properties>
+
+    <!-- To find the dependencies, set the JBoss repositories in your settings.xml. -->
+    <!-- See https://community.jboss.org/wiki/MavenGettingStarted-Developers        -->
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.jboss.arquillian</groupId>
+                <artifactId>arquillian-bom</artifactId>
+                <version>1.0.2.Final</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.jboss.spec.javax.el</groupId>
+            <artifactId>jboss-el-api_2.2_spec</artifactId>
+            <version>${version.org.jboss.spec.javax.el.jboss-el-api_2.2_spec}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss</groupId>
+            <artifactId>jboss-dmr</artifactId>
+            <version>${version.org.jboss.jboss-dmr}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.msc</groupId>
+            <artifactId>jboss-msc</artifactId>
+            <version>${version.org.jboss.msc.jboss-msc}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.as</groupId>
+            <artifactId>jboss-as-controller</artifactId>
+            <version>${version.jboss-as7}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.as</groupId>
+            <artifactId>jboss-as-controller-client</artifactId>
+            <version>${version.jboss-as7}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.as</groupId>
+            <artifactId>jboss-as-server</artifactId>
+            <version>${version.jboss-as7}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.as</groupId>
+            <artifactId>jboss-as-cli</artifactId>
+            <version>${version.jboss-as7}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- test dependecies -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.8.1</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.arquillian.junit</groupId>
+            <artifactId>arquillian-junit-container</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.as</groupId>
+            <artifactId>jboss-as-arquillian-container-managed</artifactId>
+            <version>7.1.1.Final</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.spec.javax.faces</groupId>
+            <artifactId>jboss-jsf-api_2.1_spec</artifactId>
+            <version>${version.org.jboss.spec.javax.faces.jboss-jsf-api_2.1_spec}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <testResources>
+            <testResource>
+                <directory>src/test/resources</directory>
+                <filtering>true</filtering>
+            </testResource>
+        </testResources>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.6</source>
+                    <target>1.6</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <inherited>true</inherited>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+                        </manifest>
+                        <manifestEntries>
+                            <Dependencies>org.jboss.msc,org.jboss.as.controller-client,org.jboss.as.controller,org.jboss.as.server,org.jboss.as.cli</Dependencies>
+                        </manifestEntries>
+                    </archive>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.12</version>
+                <configuration>
+                 <!--   <skip>true</skip> -->
+                    <systemPropertyVariables>
+                        <projectVersion>${project.version}</projectVersion>
+                    </systemPropertyVariables>
+                </configuration>
+            </plugin>
+
+            <!-- copy special standalone.xml configuration for testing purposes -->
+            <plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>2.5</version>
+                <executions>
+                    <execution>
+                        <id>copy-resources</id>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${jboss.home}/standalone/configuration</outputDirectory>
+                            <overwrite>true</overwrite>
+                            <resources>
+                                <resource>
+                                    <directory>src/test/jboss</directory>
+                                    <includes>
+                                        <include>standalone-test.xml</include>
+                                    </includes>
+                                    <filtering>false</filtering>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>

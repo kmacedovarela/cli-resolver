@@ -1,0 +1,19 @@
+Manifest-Version: 1.0
+Archiver-Version: Plexus Archiver
+Created-By: Apache Maven
+Built-By: ssilvert
+Build-Jdk: 1.7.0_04
+Specification-Title: dmrresolver
+Dependencies: org.jboss.msc,org.jboss.as.controller-client,org.jboss.a
+ s.controller,org.jboss.as.server,org.jboss.as.cli
+Implementation-URL: http://maven.apache.org
+Java-Vendor: Oracle Corporation
+Java-Version: 1.7.0_04
+Os-Arch: amd64
+Os-Name: Windows 7
+Os-Version: 6.1
+Scm-Connection: scm:git:git@github.com:jboss/jboss-parent-pom.git/dmrr
+ esolver
+Scm-Revision: UNKNOWN
+Scm-Url: http://github.com/jboss/jboss-parent-pom/dmrresolver
+
