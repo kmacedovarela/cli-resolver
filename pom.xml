@@ -16,12 +16,43 @@
 
     <name>dmrresolver</name>
     <description>The dmrresolver allows access to the JBoss AS7 management model from the Expression Language.</description>
-    <url>http://maven.apache.org</url>
+    <url>${dmrresolver.scm.url}</url>
+
+    <licenses>
+        <license>
+            <name>lgpl</name>
+            <url>http://repository.jboss.org/licenses/lgpl-2.1.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <scm>
+        <connection>scm:git:${dmrresolver.scm.connection}</connection>
+        <developerConnection>scm:git:${dmrresolver.scm.connection}</developerConnection>
+        <url>${dmrresolver.scm.url}</url>
+    </scm>
+
+    <issueManagement>
+        <url>https://github.com/ssilvert/dmrresolver/issues</url>
+        <system>GitHub Issues</system>
+    </issueManagement>
+
+    <developers>
+        <developer>
+            <email>ssilvert@redhat.com</email>
+            <name>Stan Silvert</name>
+            <url>https://github.com/ssilvert</url>
+            <id>ssilvert</id>
+        </developer>
+    </developers>
 
     <properties>
         <!-- For unit tests to work, set your JBOSS_HOME environment variable or set jboss.home in settings.xml -->
         <jboss.home>${env.JBOSS_HOME}</jboss.home>
-        
+
+        <dmrresolver.scm.url>https://github.com/ssilvert/dmrresolver</dmrresolver.scm.url>
+        <dmrresolver.scm.connection>git@github.com:ssilvert/dmrresolver.git</dmrresolver.scm.connection>
+
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <version.jboss-as7>7.1.1.Final</version.jboss-as7>
         <version.org.jboss.spec.javax.el.jboss-el-api_2.2_spec>1.0.1.Final</version.org.jboss.spec.javax.el.jboss-el-api_2.2_spec>
