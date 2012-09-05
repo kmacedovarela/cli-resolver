@@ -7,6 +7,6 @@
               version="2.1">
 
     <application>
-        <el-resolver>org.jboss.dmrresolver.DmrResolver</el-resolver>
+        <el-resolver>org.jboss.cliresolver.CliResolver</el-resolver>
     </application>
 </faces-config>

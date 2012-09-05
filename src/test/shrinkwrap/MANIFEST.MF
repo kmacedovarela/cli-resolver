@@ -12,8 +12,8 @@ Java-Version: 1.7.0_04
 Os-Arch: amd64
 Os-Name: Windows 7
 Os-Version: 6.1
-Scm-Connection: scm:git:git@github.com:jboss/jboss-parent-pom.git/dmrr
+Scm-Connection: scm:git:git@github.com:jboss/jboss-parent-pom.git/cli-r
  esolver
 Scm-Revision: UNKNOWN
-Scm-Url: http://github.com/jboss/jboss-parent-pom/dmrresolver
+Scm-Url: http://github.com/jboss/jboss-parent-pom/cli-resolver
 

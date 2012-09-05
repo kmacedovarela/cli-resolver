@@ -16,10 +16,10 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA  02110-1301, USA.
  */
-package org.jboss.test.dmrresolver;
+package org.jboss.test.cliresolver;
 
 import java.io.File;
-import org.jboss.dmrresolver.DmrResolver;
+import org.jboss.cliresolver.CliResolver;
 import org.jboss.shrinkwrap.api.ArchivePaths;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
@@ -50,7 +50,7 @@ public class WarCreator {
 
                                 // This didn't work because it would always install the jar from the last successful test run
                                 // instead of the latest code.  But if it did work we wouldn't need makeResolverJar().  Sigh.
-                                // .addAsLibraries(resolver.artifact("org.jboss.dmrresolver:dmrresolver:" + version).resolveAsFiles());
+                                // .addAsLibraries(resolver.artifact("org.jboss.cliresolver:cli-resolver:" + version).resolveAsFiles());
 
                                    .addAsLibraries(makeResolverJar());
    //     System.out.println("war =");
@@ -63,7 +63,7 @@ public class WarCreator {
     private static JavaArchive makeResolverJar() {
         JavaArchive jar =  ShrinkWrap.create(JavaArchive.class)
                                      .as(JavaArchive.class)
-                                     .addPackage(DmrResolver.class.getPackage())
+                                     .addPackage(CliResolver.class.getPackage())
                                      .addAsManifestResource(new File("src/test/shrinkwrap/MANIFEST.MF"))
                                      .addAsManifestResource(new File("src/main/resources/META-INF/faces-config.xml"))
                                      .addAsManifestResource(new File("src/main/resources/META-INF/services/org.jboss.msc.service.ServiceActivator"), "services/org.jboss.msc.service.ServiceActivator");

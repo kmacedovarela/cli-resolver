@@ -16,7 +16,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA  02110-1301, USA.
  */
-package org.jboss.dmrresolver;
+package org.jboss.cliresolver;
 
 import java.beans.FeatureDescriptor;
 import java.io.IOException;
@@ -45,7 +45,7 @@ import org.jboss.dmr.Property;
  *
  * @author Stan Silvert ssilvert@redhat.com (C) 2012 Red Hat Inc.
  */
-public class DmrResolver extends ELResolver {
+public class CliResolver extends ELResolver {
 
     public static final String ROOT = "_root_";
     public static final String IS_DOMAIN = "_isDomain_";
@@ -87,9 +87,9 @@ public class DmrResolver extends ELResolver {
     }
 
     /**
-     * Create a new DmrResolver.
+     * Create a new CliResolver.
      */
-    public DmrResolver() {
+    public CliResolver() {
     }
 
     @Override

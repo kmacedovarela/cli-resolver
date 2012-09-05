@@ -16,7 +16,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA  02110-1301, USA.
  */
-package org.jboss.test.dmrresolver;
+package org.jboss.test.cliresolver;
 
 import java.util.List;
 import javax.el.ELContext;
@@ -34,7 +34,7 @@ import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.dmr.ModelNode;
 import org.jboss.dmr.Property;
-import org.jboss.dmrresolver.DmrOperationFailedException;
+import org.jboss.cliresolver.DmrOperationFailedException;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.Assert;
 import org.junit.Test;

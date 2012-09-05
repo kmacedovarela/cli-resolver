@@ -9,14 +9,14 @@
         <version>9</version>
     </parent>
 
-    <groupId>org.jboss.dmrresolver</groupId>
-    <artifactId>dmrresolver</artifactId>
+    <groupId>org.jboss.cliresolver</groupId>
+    <artifactId>cli-resolver</artifactId>
     <version>1.0.0.Alpha1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>dmrresolver</name>
-    <description>The dmrresolver allows access to the JBoss AS7 management model from the Expression Language.</description>
-    <url>${dmrresolver.scm.url}</url>
+    <name>cli-resolver</name>
+    <description>The cli-resolver allows access to the JBoss AS7 management model from the Expression Language.</description>
+    <url>${cli-resolver.scm.url}</url>
 
     <licenses>
         <license>
@@ -27,13 +27,13 @@
     </licenses>
 
     <scm>
-        <connection>scm:git:${dmrresolver.scm.connection}</connection>
-        <developerConnection>scm:git:${dmrresolver.scm.connection}</developerConnection>
-        <url>${dmrresolver.scm.url}</url>
+        <connection>scm:git:${cli-resolver.scm.connection}</connection>
+        <developerConnection>scm:git:${cli-resolver.scm.connection}</developerConnection>
+        <url>${cli-resolver.scm.url}</url>
     </scm>
 
     <issueManagement>
-        <url>https://github.com/ssilvert/dmrresolver/issues</url>
+        <url>https://github.com/ssilvert/cli-resolver/issues</url>
         <system>GitHub Issues</system>
     </issueManagement>
 
@@ -50,8 +50,8 @@
         <!-- For unit tests to work, set your JBOSS_HOME environment variable or set jboss.home in settings.xml -->
         <jboss.home>${env.JBOSS_HOME}</jboss.home>
 
-        <dmrresolver.scm.url>https://github.com/ssilvert/dmrresolver</dmrresolver.scm.url>
-        <dmrresolver.scm.connection>git@github.com:ssilvert/dmrresolver.git</dmrresolver.scm.connection>
+        <cli-resolver.scm.url>https://github.com/ssilvert/cli-resolver</cli-resolver.scm.url>
+        <cli-resolver.scm.connection>git@github.com:ssilvert/cli-resolver.git</cli-resolver.scm.connection>
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <version.jboss-as7>7.1.1.Final</version.jboss-as7>
