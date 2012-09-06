@@ -39,6 +39,7 @@ import org.jboss.msc.value.InjectedValue;
  * http://management-platform.blogspot.com/2012/07/co-located-management-client-for.html
  *
  * @author Stan Silvert ssilvert@redhat.com (C) 2012 Red Hat Inc.
+ * @author John Mazzitelli mazz@redhat.com (C) 2012 Red Hat Inc.
  */
 public class ManagementService implements ServiceActivator {
    private static volatile ModelController controller;
