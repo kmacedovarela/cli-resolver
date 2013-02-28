@@ -130,7 +130,7 @@ public class ResolverTest {
 
     @Test
     public void testCLICommandResultingInList() {
-        Object value = resolve("#{_CLI_['/subsystem=logging/logger=*/:read-resource']}", List.class);
+        Object value = resolve("#{_CLI_['/subsystem=logging/logger=*/:read-resource'].execute}", List.class);
         Assert.assertNotNull(value);
         List<ModelNode> list = (List<ModelNode>)value;
 
@@ -151,7 +151,7 @@ public class ResolverTest {
 
     @Test
     public void testCLICommandResultingInModelNode() {
-        ModelNode value = (ModelNode)resolve("#{_CLI_['/:read-attribute(name=launch-type)']}", ModelNode.class);
+        ModelNode value = (ModelNode)resolve("#{_CLI_['/:read-attribute(name=launch-type)'].execute}", ModelNode.class);
         Assert.assertNotNull(value);
         Assert.assertEquals("STANDALONE", value.asString());
     }
@@ -160,7 +160,7 @@ public class ResolverTest {
     public void testCLICommandResultingInFailure() {
         // lunch-type :-)
         try {
-            resolve("#{_CLI_['/:read-attribute(name=lunch-type)']}", ModelNode.class);
+            resolve("#{_CLI_['/:read-attribute(name=lunch-type)'].execute}", ModelNode.class);
             Assert.fail("Expected ELException");
         } catch (ELException e) {
             Assert.assertTrue(e.getMessage().contains("JBAS014792: Unknown attribute lunch-type"));
@@ -171,7 +171,7 @@ public class ResolverTest {
     public void testResolutionOfElementInPropertyList() {
         // CLI command returns a list of loggers (List<ModelNode>).  Then resolve the first element in the list (a ModelNode),
         // followed by the address attribute, which is a property list.  Finally, resolve the value of the subsystem property.
-        String value = (String)resolve("#{_CLI_['/subsystem=logging/logger=*/:read-resource'][0].address.subsystem}", String.class);
+        String value = (String)resolve("#{_CLI_['/subsystem=logging/logger=*/:read-resource'].execute[0].address.subsystem}", String.class);
         Assert.assertNotNull(value);
         Assert.assertEquals("logging", value);
     }
@@ -186,7 +186,7 @@ public class ResolverTest {
 
     @Test
     public void testAsPropertyList() {
-        String el = "#{_CLI_['/core-service=management/:read-resource(recursive=true)']._asPropertyList_}";
+        String el = "#{_CLI_['/core-service=management/:read-resource(recursive=true)'].execute._asPropertyList_}";
         List<Property> propList = (List<Property>)resolve(el, List.class);
         Assert.assertEquals(3, propList.size());
         for (Property prop: propList) {
@@ -200,7 +200,7 @@ public class ResolverTest {
         String encoding = (String)resolve(el, String.class);
         //Assert.assertNull(encoding);
 
-        String methodExp = "#{_CLI_['/subsystem=logging/periodic-rotating-file-handler=FILE/:write-attribute(name=encoding,value=UTF-8)'].get('outcome')}";
+        String methodExp = "#{_CLI_['/subsystem=logging/periodic-rotating-file-handler=FILE/:write-attribute(name=encoding,value=UTF-8)'].execute.get('outcome')}";
         ModelNode result = (ModelNode)resolveMethodExp(methodExp, null, new Class[0]);
         Assert.assertEquals("success", result.asString());
 

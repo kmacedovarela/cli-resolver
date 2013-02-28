@@ -224,7 +224,7 @@ public class CliResolver extends ELResolver {
         }
 
         if (base.equals(CLI)) {
-            return executeCLI(strProperty);
+            return new NativeExecutor(strProperty);
         }
 
         // base must be a ModelNode
@@ -258,7 +258,6 @@ public class CliResolver extends ELResolver {
         try {
             ModelNode result = dmrClient().execute(modelNode);
             finalResult = convertValueToJavaType(result.get("result"));
-
             if (!(finalResult instanceof List)) {
                 return finalResult;
             } else {
@@ -331,7 +330,7 @@ public class CliResolver extends ELResolver {
         }
     }
 
-    private boolean isOutcomeFailed(ModelNode result) {
+    static boolean isOutcomeFailed(ModelNode result) {
         String outcome = result.get("outcome").asString();
         return !outcome.equals("success");
     }
@@ -497,7 +496,13 @@ public class CliResolver extends ELResolver {
         rscDesc.get("address").set(address.clone());
         rscDesc.get("operation").set("read-resource-description");
         ModelNode result = dmrClient().execute(rscDesc);
-        ModelType type = result.get("result", "attributes", property, "value-type").asType();
+        ModelNode valueType = result.get("result", "attributes", property, "value-type");
+
+        // TODO: handle complex value-types such as
+        // subsystem=datasources/installed-drivers
+        // right now we're just converting to String
+        ModelType type = ModelType.STRING; // if it's not a type, call it a String
+        if (valueType.getType() == ModelType.TYPE) type = valueType.asType();
 
         // create a new list with the elements converted
         List convertedList = new ArrayList(elements.size());
@@ -535,38 +540,16 @@ public class CliResolver extends ELResolver {
         return property.contains("_eq_") || property.equals(ROOT);
     }
 
+    public static CommandContext cliContext() {
+        return cliContext;
+    }
+
     // return the correct DMR client depending on if we are running standalone or domain
-    private ModelControllerClient dmrClient() {
+    public static ModelControllerClient dmrClient() {
         if (isDomain) {
             return domainDmrClient;
         }
         return localDmrClient;
     }
 
-    private Object executeCLI(String command) {
-        ModelNode operation = null;
-        try {
-            operation = cliContext.buildRequest(command);
-        } catch (CommandFormatException e) {
-            throw new ELException(e);
-        }
-
-        try {
-            ModelNode result = dmrClient().execute(operation);
-            if (isOutcomeFailed(result)) {
-                throw new DmrOperationFailedException(operation, result);
-            }
-
-            ModelNode commandResult = result.get("result");
-            if (!commandResult.isDefined()) return result;
-
-            if (commandResult.getType() == ModelType.LIST) {
-                return commandResult.asList();
-            } else {
-                return commandResult;
-            }
-        } catch (IOException e) {
-            throw new ELException(e);
-        }
-    }
 }

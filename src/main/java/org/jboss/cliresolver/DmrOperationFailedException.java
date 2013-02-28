@@ -28,8 +28,15 @@ import org.jboss.dmr.ModelNode;
  */
 public class DmrOperationFailedException extends ELException {
 
+    private String command;
     private ModelNode operation;
     private ModelNode response;
+
+    public DmrOperationFailedException(String command, ModelNode response) {
+        super(response.get("failure-description").asString());
+        this.command = command;
+        this.response = response;
+    }
 
     public DmrOperationFailedException(ModelNode operation, ModelNode response) {
         super(response.get("failure-description").asString());
@@ -39,6 +46,10 @@ public class DmrOperationFailedException extends ELException {
 
     public ModelNode getOperation() {
         return operation;
+    }
+
+    public String getCommand() {
+        return command;
     }
 
     public ModelNode getResponse() {
