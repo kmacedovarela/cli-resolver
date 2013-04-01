@@ -10,7 +10,7 @@
 
     <groupId>org.jboss.cliresolver</groupId>
     <artifactId>cli-resolver</artifactId>
-    <version>1.0.0.Alpha2-SNAPSHOT</version>
+    <version>1.0.0.Alpha2</version>
     <packaging>jar</packaging>
 
     <name>cli-resolver</name>
